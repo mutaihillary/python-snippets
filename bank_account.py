@@ -1,39 +1,55 @@
-class BankAccount():
-    def __init__(self, balance=500):
-        self.balance = balance
+class BankAccount(object):
 
-    def deposit(self, cash):
-        self.balance += int(cash)
+    def __init__(self):
+        pass
 
-    def withdraw(self, cash):
-        if cash > self.balance:
+    def withdraw():
+        pass
+    def deposit():
+        pass
+
+class SavingsAccount(BankAccount):
+
+    def __init__(self):
+        self.balance = 500
+
+    def deposit(self, amount):
+        if (amount < 0):
+            return "Invalid deposit amount"
+        else:
+            self.balance += amount
+            return self.balance
+
+    def withdraw(self, amount):
+        if ((self.balance - amount) > 0) and ((self.balance - amount) < 500):
             return "Cannot withdraw beyond the minimum account balance"
-        self.balance -= cash
+        elif (self.balance - amount) < 0:
+            return "Cannot withdraw beyond the current account balance"
+        elif amount < 0:
+            return "Invalid withdraw amount"
+        else:
+            self.balance -= amount
+            return self.balance
 
-class MinimumBalanceAccount(BankAccount):
-    pass
+class CurrentAccount(BankAccount):
 
-class Customer (object):
-"""A customer of ABC Bank with a checking account. Customers have the
-following properties:
-Attributes:
-name: A string representing the customer's name.
-balance: A float tracking the current balance of the customer's account.
-"""
-def __init__(self, name, balance=0.0):
-"""Return a Customer object whose name is *name* and starting
-balance is *balance*."""
-self.name = name
-self.balance = balance
-def withdraw(self, amount):
-"""Return the balance remaining after withdrawing *amount*
-dollars."""
-if amount > self.balance:
-raise RuntimeError ('Amount greater than available balance.')
-self.balance -= amount
-return self.balance
-def deposit(self, amount):
-"""Return the balance remaining after depositing *amount*
-dollars."""
-self.balance += amount
-return self.balance
+    def __init__(self):
+        self.balance = 0
+
+
+    def deposit(self, amount):
+        if amount < 0:
+            return "Invalid deposit amount"
+        else:
+            self.balance += amount
+            return self.balance
+
+
+    def withdraw(self, amount):
+        if amount < 0:
+            return "Invalid withdraw amount"
+        elif self.balance < amount:
+            return "Cannot withdraw beyond the current account balance"
+        else:
+            self.balance -= amount
+            return self.balance
